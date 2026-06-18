@@ -39,3 +39,32 @@ if (form) {
         }
     });
 }
+// CONTROL DEL MENÚ HAMBURGUESA EN MOBILE
+document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav');
+    const navLinks = document.querySelectorAll('.nav a');
+
+    if (navToggle && navMenu) {
+        // Al tocar el botón hamburguesa, abre o cierra el menú
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('nav-visible');
+            
+            // Cambia el ícono de las tres rayitas por una "X" cuando está abierto
+            const icon = navToggle.querySelector('i');
+            if (navMenu.classList.contains('nav-visible')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Si el usuario toca cualquier opción del menú, este se cierra solo (para ir a la sección)
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('nav-visible');
+                navToggle.querySelector('i').className = 'fas fa-bars';
+            });
+        });
+    }
+});
